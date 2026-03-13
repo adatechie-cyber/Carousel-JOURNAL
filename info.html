@@ -1,1 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journal of Nature Science and Sustainable Technology</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a18;
+    --deep: #0d2a1f;
+    --forest: #1e4d35;
+    --sage: #3a7a58;
+    --pale: #e8f0eb;
+    --cream: #f7f4ee;
+    --warm: #f2ede3;
+    --gold: #b08d4a;
+    --gold-light: #d4aa6a;
+    --rule: #c8c0b0;
+    --text: #2c2c28;
+    --muted: #6a6a60;
+    --white: #ffffff;
+    --slide-speed: 0.7s;
+  }
 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── MASTHEAD ─── */
+  .masthead {
+    background: var(--deep);
+    color: var(--pale);
+    text-align: center;
+    padding: 18px 24px 14px;
+    border-bottom: 3px solid var(--gold);
+  }
+  .masthead-title {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(1.1rem, 3.5vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    color: var(--white);
+  }
+  .masthead-sub {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-top: 4px;
+  }
+
+  /* ─── NAV TABS ─── */
+  .nav-tabs {
+    display: flex;
+    justify-content: center;
+    background: var(--forest);
+    border-bottom: 2px solid var(--gold);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(232,240,235,0.75);
+    padding: 13px 20px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: color 0.25s, border-color 0.25s;
+    flex-shrink: 0;
+  }
+  .nav-tab:hover { color: var(--gold-light); }
+  .nav-tab.active {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ─── CAROUSEL CONTAINER ─── */
+  .carousel-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+  .carousel-track {
+    display: flex;
+    transition: transform var(--slide-speed) cubic-bezier(0.65,0,0.35,1);
+    will-change: transform;
+  }
+  .slide {
+    min-width: 100%;
+    background: var(--cream);
+  }
+
+  /* ─── CAROUSEL ARROWS ─── */
+  .carousel-arrow {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    background: var(--deep);
+    color: var(--gold-light);
+    border: none;
+    width: 36px;
+    height: 72px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .carousel-arrow:hover { background: var(--forest); color: var(--white); }
+  .carousel-arrow.prev { left: 0; border-radius: 0 4px 4px 0; }
+  .carousel-arrow.next { right: 0; border-radius: 4px 0 0 4px; }
+  @media(max-width:600px){
+    .carousel-arrow { width:28px; height:56px; font-size:0.9rem; }
+  }
+
+  /* ─── SLIDE DOTS ─── */
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 0;
+    background: var(--warm);
+    border-top: 1px solid var(--rule);
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--rule);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    border: none;
+  }
+  .dot.active { background: var(--forest); transform: scale(1.4); }
+
+  /* ─── TYPOGRAPHY ─── */
+  h1, h2, h3, h4 { font-family: 'EB Garamond', serif; }
+  h2 {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    font-weight: 600;
+    color: var(--deep);
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 8px;
+    margin-bottom: 18px;
+  }
+  h3 {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-weight: 600;
+    color: var(--forest);
+    margin-bottom: 10px;
+    margin-top: 24px;
+  }
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  p {
+    font-size: clamp(0.88rem, 2vw, 0.97rem);
+    line-height: 1.75;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+
+  /* ─── LAYOUT ─── */
+  .content-max {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 36px 20px 48px;
+  }
+  .rule-line {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 28px 0;
+  }
+  .rule-thick {
+    border: none;
+    border-top: 2px solid var(--forest);
+    margin: 32px 0 28px;
+  }
+
+  /* ─── SLIDE 1 ─── */
+  .journal-hero {
+    background: var(--deep);
+    color: var(--pale);
+    text-align: center;
+    padding: 40px 24px 32px;
+    border-bottom: 4px double var(--gold);
+  }
+  .journal-hero h1 {
+    font-size: clamp(1.3rem, 4.5vw, 2.4rem);
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+  }
+  .journal-hero .hero-meta {
+    margin-top: 16px;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+  .editors-block {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .editor-card {
+    flex: 1 1 200px;
+    max-width: 260px;
+    padding: 14px 20px;
+    border-left: 3px solid var(--gold);
+    margin: 8px;
+    text-align: left;
+  }
+  .editor-card .ed-title {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--gold-light);
+    margin-bottom: 4px;
+  }
+  .editor-card .ed-name {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--white);
+    font-weight: 500;
+  }
+  .editor-card .ed-affil {
+    font-size: 0.78rem;
+    color: rgba(232,240,235,0.7);
+    margin-top: 2px;
+  }
+
+  .meta-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 24px 0;
+    justify-content: center;
+  }
+  .meta-item {
+    background: var(--warm);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--forest);
+    padding: 10px 18px;
+    font-size: 0.85rem;
+  }
+  .meta-item strong { color: var(--deep); display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
+
+  .insight-box {
+    background: var(--pale);
+    border: 1px solid var(--forest);
+    border-left: 4px solid var(--forest);
+    padding: 16px 20px;
+    margin: 24px 0;
+  }
+  .insight-box h3 { margin-top: 0; }
+  .insight-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 24px;
+    font-size: 0.85rem;
+  }
+  .insight-row span { color: var(--muted); }
+  .insight-row strong { color: var(--deep); }
+
+  .index-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .index-tag {
+    background: var(--deep);
+    color: var(--pale);
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── SLIDE 2 ─── */
+  .toc-section { margin-bottom: 28px; }
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 8px 0;
+    border-bottom: 1px dotted var(--rule);
+    font-size: 0.9rem;
+    gap: 10px;
+  }
+  .toc-item:last-child { border-bottom: none; }
+  .toc-article { flex: 1; color: var(--text); font-style: italic; }
+  .toc-authors { font-size: 0.78rem; color: var(--muted); }
+  .toc-pages { font-size: 0.82rem; color: var(--forest); font-weight: 600; white-space: nowrap; }
+
+  .staff-block {
+    background: var(--warm);
+    border: 1px solid var(--rule);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .staff-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--sage);
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 6px;
+  }
+  .staff-person { margin-bottom: 10px; }
+  .staff-name {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--deep);
+  }
+  .staff-role { font-size: 0.8rem; color: var(--muted); }
+  .staff-email { font-size: 0.8rem; color: var(--forest); }
+
+  .board-list {
+    columns: 2;
+    column-gap: 24px;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    list-style: none;
+  }
+  @media(max-width:560px){ .board-list { columns: 1; } }
+  .board-list li {
+    break-inside: avoid;
+    padding: 4px 0;
+    border-bottom: 1px dotted var(--rule);
+    color: var(--text);
+  }
+  .board-list li span { color: var(--muted); font-size: 0.75rem; display: block; }
+
+  /* Scientific Committee toggle */
+  .sc-toggle {
+    background: var(--forest);
+    color: var(--pale);
+    border: none;
+    padding: 10px 22px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 0;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sc-toggle:hover { background: var(--sage); }
+  .sc-toggle .arrow { transition: transform 0.3s; display: inline-block; }
+  .sc-toggle.open .arrow { transform: rotate(180deg); }
+  .sc-content {
+    display: none;
+    padding: 18px 20px;
+    background: var(--pale);
+    border: 1px solid var(--rule);
+    border-top: none;
+  }
+  .sc-content.open { display: block; }
+
+  .notice-box {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-style: italic;
+    border-left: 3px solid var(--rule);
+    padding-left: 12px;
+    margin: 12px 0;
+  }
+
+  /* ─── SLIDE 3 – PAPERS ─── */
+  .paper-card {
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--forest);
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    background: var(--white);
+    transition: box-shadow 0.25s, border-left-color 0.25s;
+    cursor: default;
+  }
+  .paper-card:hover {
+    box-shadow: 0 4px 20px rgba(30,77,53,0.12);
+    border-left-color: var(--gold);
+  }
+  .paper-journal-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .paper-title {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    font-weight: 600;
+    color: var(--deep);
+    line-height: 1.35;
+    margin-bottom: 6px;
+  }
+  .paper-authors {
+    font-size: 0.8rem;
+    color: var(--forest);
+    margin-bottom: 4px;
+    font-style: italic;
+  }
+  .paper-affil {
+    font-size: 0.76rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .paper-abstract {
+    font-size: 0.84rem;
+    line-height: 1.65;
+    color: var(--text);
+    border-top: 1px solid var(--rule);
+    padding-top: 10px;
+    margin-top: 8px;
+  }
+  .paper-vol {
+    font-size: 0.74rem;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  .archive-note {
+    background: var(--deep);
+    color: var(--pale);
+    padding: 20px 24px;
+    margin-top: 32px;
+    font-size: 0.84rem;
+    line-height: 1.7;
+  }
+  .archive-note strong { color: var(--gold-light); }
+
+  .orig-note {
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 18px;
+    font-style: italic;
+  }
+
+  /* ─── SLIDE 3 SERVICES (Submit) ─── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .service-card {
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--forest);
+    padding: 16px 18px;
+    background: var(--white);
+    transition: border-top-color 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+  }
+  .service-card:hover {
+    border-top-color: var(--gold);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .service-card h4 { font-size: 0.9rem; margin-bottom: 6px; color: var(--deep); }
+  .service-card p { font-size: 0.78rem; margin-bottom: 0; color: var(--muted); line-height: 1.5; }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--forest);
+    color: var(--pale);
+    padding: 11px 28px;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: 'Source Sans 3', sans-serif;
+    margin: 6px 6px 6px 0;
+  }
+  .cta-btn:hover { background: var(--deep); }
+  .cta-btn.outline {
+    background: transparent;
+    color: var(--forest);
+    border: 2px solid var(--forest);
+  }
+  .cta-btn.outline:hover { background: var(--forest); color: var(--pale); }
+
+  .contact-block {
+    background: var(--warm);
+    border: 1px solid var(--rule);
+    padding: 20px;
+    font-size: 0.87rem;
+    line-height: 1.8;
+  }
+  .contact-block strong { color: var(--deep); }
+
+  /* ─── HOVER GALLERY ON PAPERS ─── */
+  .gallery-strip {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .gallery-inner {
+    display: flex;
+    gap: 0;
+  }
+  .gallery-cell {
+    flex: 1;
+    min-height: 90px;
+    background: var(--deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 12px;
+    text-align: center;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+    transition: flex 0.45s cubic-bezier(0.65,0,0.35,1), background 0.3s;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .gallery-cell:last-child { border-right: none; }
+  .gallery-cell:hover { flex: 3; background: var(--forest); }
+  .gallery-cell .cell-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gold-light);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transition: writing-mode 0.3s, opacity 0.3s;
+    opacity: 0.8;
+  }
+  .gallery-cell:hover .cell-label {
+    writing-mode: horizontal-tb;
+    opacity: 1;
+  }
+  .gallery-cell .cell-detail {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(13,42,31,0.92);
+    color: var(--pale);
+    font-size: 0.74rem;
+    line-height: 1.5;
+    padding: 8px 10px;
+    transform: translateY(100%);
+    transition: transform 0.35s;
+  }
+  .gallery-cell:hover .cell-detail { transform: translateY(0); }
+  @media(max-width:480px){
+    .gallery-cell .cell-label { writing-mode: horizontal-tb; font-size: 0.62rem; }
+    .gallery-cell { min-height: 60px; }
+  }
+
+  /* ─── FOOTER ─── */
+  .site-footer {
+    background: var(--ink);
+    color: rgba(232,240,235,0.6);
+    text-align: center;
+    font-size: 0.72rem;
+    padding: 14px 20px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Utilities */
+  .small-note { font-size: 0.75rem; color: var(--muted); font-style: italic; }
+  .col-2-text { columns: 2; column-gap: 28px; font-size: 0.87rem; }
+  @media(max-width:560px){ .col-2-text { columns: 1; } }
+  .section-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .notes-block {
+    background: var(--pale);
+    border: 1px solid var(--rule);
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    line-height: 1.75;
+  }
+  .notes-block h3 { margin-top: 0; }
+
+  .manuscript-section details summary {
+    cursor: pointer;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--forest);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+    list-style: none;
+  }
+  .manuscript-section details summary::-webkit-details-marker { display: none; }
+  .manuscript-section details[open] summary { border-bottom-color: var(--forest); }
+  .manuscript-section details .detail-content {
+    padding: 14px 0 6px;
+    font-size: 0.84rem;
+    line-height: 1.75;
+  }
+
+  @media(max-width: 700px) {
+    .editors-block { flex-direction: column; align-items: center; }
+    .editor-card { max-width: 100%; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-title">Journal of Nature Science and Sustainable Technology</div>
+  <div class="masthead-sub">Scientiae Naturalis &mdash; An International Peer-Reviewed Journal</div>
+</header>
+
+<nav class="nav-tabs" id="navTabs">
+  <button class="nav-tab active" onclick="goTo(0)">About the Journal</button>
+  <button class="nav-tab" onclick="goTo(1)">Editorial Information</button>
+  <button class="nav-tab" onclick="goTo(2)">Published Work &amp; Services</button>
+</nav>
+
+<div class="carousel-wrap">
+  <div class="carousel-track" id="track">
+
+    <!-- ══════════════════════════════════════
+         SLIDE 1 — JOURNAL PRESENTATION
+    ══════════════════════════════════════ -->
+    <div class="slide">
+
+      <div class="journal-hero">
+        <div class="section-label">International Scientific Journal</div>
+        <h1>Journal of Nature Science<br>and Sustainable Technology</h1>
+        <div class="hero-meta">ISSN 1933-0324 &nbsp;|&nbsp; Quarterly &nbsp;|&nbsp; Peer-Reviewed</div>
+        <div class="editors-block">
+          <div class="editor-card">
+            <div class="ed-title">Editor-in-Chief</div>
+            <div class="ed-name">Emiliano Carretti</div>
+            <div class="ed-affil">Professor, University of Florence, Italy</div>
+          </div>
+          <div class="editor-card">
+            <div class="ed-title">Editor-in-Chief</div>
+            <div class="ed-name">Stefano Menichetti</div>
+            <div class="ed-affil">Professor, University of Florence, Italy</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-max">
+
+        <div class="meta-grid">
+          <div class="meta-item"><strong>Print Binding</strong>Softcover</div>
+          <div class="meta-item"><strong>Print Size</strong>7&Prime; &times; 10&Prime;</div>
+          <div class="meta-item"><strong>Format</strong>Single Column</div>
+          <div class="meta-item"><strong>Frequency</strong>Quarterly</div>
+          <div class="meta-item"><strong>ISSN</strong>1933-0324</div>
+        </div>
+
+        <hr class="rule-thick">
+        <h2>About the Journal</h2>
+
+        <p>Inspired by the story of Antaeus, the ancient giant-god of Greek mythology who was rendered powerless only by breaking contact with the earth, this journal welcomes to its pages those researching technological solutions that promise sustainability in the long term. Pro-nature and pro-environment in its fundamental orientation, this journal is committed to providing a première-quality space for research and review articles dealing with such phenomena as thermodynamic reversibility, negative entropy, direct applications of solar and wind energy, direct-use fuel cell, and any other approaches whose essence is profoundly innovative, economically attractive, environmentally appealing, and socially responsible.</p>
+
+        <p>Even though claims have been made to emulate nature, no modern technology truly emulates the science of nature. It has been quite the opposite: observations of nature have rarely been translated into pro-nature technology development. Today, some of the most important technological breakthroughs have been mere manifestations of the linearization of nature science: nature linearized by focusing only on its external features. Today, computers process information exactly opposite to how the human brain does. Turbines produce electrical energy while polluting the environment beyond repair, even as electric eels produce much higher-intensity electricity while cleaning the environment. Batteries store very little electricity while producing very toxic spent materials. Synthetic plastic materials look like natural plastic, yet their syntheses follow an exactly opposite path. Furthermore, synthetic plastics do not have a single positive impact on the environment, whereas natural plastic materials do not have a single negative impact. In medical science, every promise made at the onset of commercialization has proven to be opposite to what actually happened: witness Prozac, Vioxx, Viagra, etc. Nature, on the other hand, did not allow a single product to impact the long-term negatively. Even the deadliest venom has numerous beneficial effects in the long-term. This catalogue carries on in all directions: microwave cooking, fluorescent lighting, nuclear energy, cellular phones, refrigeration cycles to combustion cycles. In essence, nature continues to improve matters in its quality, as modern technologies continue to degrade the same into baser qualities.</p>
+
+        <p>Nature thrives on diversity and flexibility, gaining strength from heterogeneity, whereas the quest for homogeneity seems to motivate much of modern engineering. Nature is non-linear and inherently promotes multiplicity of solutions. Modern applied science, however, continues to define problems as linearly as possible, promoting singularity of solution, while particularly avoiding non-linear problems. Nature is inherently sustainable and promotes zero-waste, both in mass and energy. Engineering solutions today start with a safety factor while promoting an obsession with excess, hence waste. Nature is truly transient, never showing any exact repeatability or steady state. Engineering today is obsessed with standards and replicability, always seeking steady-state solutions.</p>
+
+        <p>There are thousands of science and engineering journals, but this is the only journal promoting the approach that breaks out of the traditional path of linearizing natural phenomena and accepting research that is inherently pro-nature. This journal offers the best hope of finally emulating nature rather than deviating from it.</p>
+
+        <hr class="rule-line">
+
+        <div class="insight-box">
+          <h3>Journal Insights</h3>
+          <div class="insight-row">
+            <div><span>ISSN</span><strong>1933-0324</strong></div>
+            <div><span>Frequency</span><strong>Quarterly</strong></div>
+            <div><span>Coverage</span><strong>International</strong></div>
+            <div><span>Format</span><strong>Print &amp; Digital</strong></div>
+          </div>
+          <hr class="rule-line" style="margin:16px 0 12px;">
+          <div class="section-label">Abstracting &amp; Indexing</div>
+          <div class="index-list">
+            <span class="index-tag">Directory of Open Access Journals (DOAJ)</span>
+            <span class="index-tag">PubMed</span>
+            <span class="index-tag">Scopus</span>
+            <span class="index-tag">Emerging Sources Citation Index (ESCI)</span>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /SLIDE 1 -->
+
+
+    <!-- ══════════════════════════════════════
+         SLIDE 2 — EDITORIAL INFORMATION
+    ══════════════════════════════════════ -->
+    <div class="slide">
+      <div class="content-max">
+
+        <h2>Table of Contents &mdash; Current Issue</h2>
+        <div class="toc-section">
+          <div class="toc-item">
+            <div>
+              <div class="toc-article">Thermodynamic Reversibility in Biological Systems: A Framework for Sustainable Energy Conversion</div>
+              <div class="toc-authors">M. R. Jensen, L. Ferreira, A. Nakamura</div>
+            </div>
+            <div class="toc-pages">1&ndash;18</div>
+          </div>
+          <div class="toc-item">
+            <div>
+              <div class="toc-article">Negative Entropy and Structural Organization in Living Matter</div>
+              <div class="toc-authors">C. Osei, P. Volkov, S. Carretti</div>
+            </div>
+            <div class="toc-pages">19&ndash;34</div>
+          </div>
+          <div class="toc-item">
+            <div>
+              <div class="toc-article">Direct Solar Energy Applications: From Photosynthesis to Photovoltaic Biomimicry</div>
+              <div class="toc-authors">R. Abubakar, T. Watanabe, G. Novak</div>
+            </div>
+            <div class="toc-pages">35&ndash;54</div>
+          </div>
+          <div class="toc-item">
+            <div>
+              <div class="toc-article">Fuel Cells Inspired by Mitochondrial Electron Transport Chains</div>
+              <div class="toc-authors">H. Lindström, Y. Okonkwo, M. Rashid</div>
+            </div>
+            <div class="toc-pages">55&ndash;72</div>
+          </div>
+          <div class="toc-item">
+            <div>
+              <div class="toc-article">Zero-Waste Manufacturing: Principles from Ecosystem Nutrient Cycling</div>
+              <div class="toc-authors">B. Srivastava, K. Mensah, C. Reyes</div>
+            </div>
+            <div class="toc-pages">73&ndash;90</div>
+          </div>
+          <div class="toc-item">
+            <div>
+              <div class="toc-article">Wind Energy Harvesting Modeled After Cetacean Hydrodynamics</div>
+              <div class="toc-authors">P. Dubois, N. Al-Rashidi, J. Park</div>
+            </div>
+            <div class="toc-pages">91&ndash;108</div>
+          </div>
+        </div>
+
+        <hr class="rule-thick">
+        <h2>Editorial Structure</h2>
+
+        <div class="staff-block">
+          <div class="staff-label">Editors-in-Chief</div>
+          <div class="staff-person">
+            <div class="staff-name">Emiliano Carretti</div>
+            <div class="staff-role">Professor, University of Florence, Italy</div>
+            <div class="staff-email">procurement@scientiae-naturalis.org</div>
+          </div>
+          <div class="staff-person">
+            <div class="staff-name">Stefano Menichetti</div>
+            <div class="staff-role">Professor, University of Florence, Italy</div>
+            <div class="staff-email">procurement@scientiae-naturalis.org</div>
+          </div>
+        </div>
+
+        <div class="staff-block">
+          <div class="staff-label">Managing Editor</div>
+          <div class="staff-person">
+            <div class="staff-name">Chefi Ketata</div>
+            <div class="staff-role">Consultant</div>
+            <div class="staff-email">procurement@scientiae-naturalis.org</div>
+          </div>
+        </div>
+
+        <hr class="rule-line">
+        <h2>Editorial Board</h2>
+        <div class="notice-box">All members of the Editorial Board have identified their affiliated institutions or organizations, along with the corresponding country or geographic region. Scientiae Naturalis remains neutral with regard to any jurisdictional claims.</div>
+
+        <ul class="board-list">
+          <li>S. Ahmad <span>Faculty of Medicine, Dalhousie University, Canada</span></li>
+          <li>Avijit Basu <span>University of British Columbia, Kelowna, B.C., Canada</span></li>
+          <li>J. Biazar <span>Dept. of Mathematics, University of Sorbonne&ndash;Abu Dhabi, France</span></li>
+          <li>O. Chaalal <span>Faculty of Engineering, Tiaret University, Algeria</span></li>
+          <li>A. Chakma <span>University of Waterloo, Kitchener, Ontario, Canada</span></li>
+          <li>G.V. Chilingar <span>Dept. of Civil and Environmental Engineering, University of Southern California, USA</span></li>
+          <li>T. Ertiken <span>Dept. of Energy and Geo-environmental Engineering, Pennsylvania State University, USA</span></li>
+          <li>S.M. Farouq Ali <span>Faculty of Engineering, Universities of Calgary, Alberta, and Regina, Canada</span></li>
+          <li>Sudhir K. Garg <span>Eternal University, Himachal Pradesh, India</span></li>
+          <li>Enamul Hossain <span>Memorial University, St. John's, NL, Canada</span></li>
+          <li>M.A. Islam <span>Vice Chancellor, Shahjalal University of Science and Technology, Bangladesh</span></li>
+          <li>S.K. Jadoon <span>Oil and Gas Development Company Limited, Islamabad, Pakistan</span></li>
+          <li>A. Kuznetsov <span>Dubna University and Russian Academy of Natural Science, Russia</span></li>
+          <li>S. Lakhal <span>Dept. of Business Administration, University of Moncton, Canada</span></li>
+          <li>Loretta Li <span>Dept. of Civil Engineering, University of British Columbia, Canada</span></li>
+          <li>K. Nandakumar <span>Dept. of Chemical Engineering, University of Alberta, Canada</span></li>
+          <li>D. Peel <span>White and Case Law Firm, London, U.K.</span></li>
+          <li>D.L. Prior <span>Veridity Environmental Technologies, Halifax, Canada</span></li>
+          <li>M. Satish <span>Faculty of Engineering, Dalhousie University, Canada</span></li>
+          <li>Kaushik K. Shandilya <span>Baker College, Flint, MI, USA</span></li>
+          <li>S. Siddiqui <span>Aramco, Dhahran, KSA</span></li>
+          <li>J. Speight <span>University of Wyoming, USA</span></li>
+          <li>H. Vaziri <span>BP Americas, Houston, Texas, USA</span></li>
+          <li>D.T. Wasan <span>Illinois Institute of Technology, USA</span></li>
+          <li>Andreas Wladis <span>Karolinska (Medical) Institute, Sweden</span></li>
+          <li>T.F. Yen <span>Dept. of Civil and Environmental Engineering, University of Southern California, USA</span></li>
+          <li>Gennady E. Zaikov <span>Russian Academy of Sciences, Russia</span></li>
+          <li>G. Zatzman <span>EEC Research Organization, Halifax, Toronto, Canada</span></li>
+        </ul>
+
+        <hr class="rule-line">
+
+        <!-- SCIENTIFIC COMMITTEE — HIDDEN TOGGLE -->
+        <button class="sc-toggle" id="scBtn" onclick="toggleSC()">
+          Scientific Committee <span class="arrow">&#9660;</span>
+        </button>
+        <div class="sc-content" id="scContent">
+          <div class="notice-box" style="margin-top:0;margin-bottom:14px;">The Scientific Committee comprises distinguished scholars from institutions across five continents. All members are listed with ORCID identifiers where available.</div>
+          <ul class="board-list">
+            <li>A. Abbasi <span>ORCID: 0000-0001-7643-8391 &mdash; Tehran University, Iran</span></li>
+            <li>P. Achterberg <span>ORCID: 0000-0002-3094-7812 &mdash; Delft University of Technology, Netherlands</span></li>
+            <li>R. Aguilar-López <span>ORCID: 0000-0003-2745-1128 &mdash; Instituto Politécnico Nacional, Mexico</span></li>
+            <li>F. Al-Mubarak <span>ORCID: 0000-0001-9234-5670 &mdash; King Fahd University of Petroleum and Minerals, KSA</span></li>
+            <li>T. Amano <span>ORCID: 0000-0002-8751-0317 &mdash; Osaka University, Japan</span></li>
+            <li>S. Badr <span>ORCID: 0000-0003-1192-8834 &mdash; Cairo University, Egypt</span></li>
+            <li>M. Balat <span>ORCID: 0000-0001-6334-9822 &mdash; Suleyman Demirel University, Turkey</span></li>
+            <li>J. Barbosa-Cánovas <span>ORCID: 0000-0002-3841-0071 &mdash; Washington State University, USA</span></li>
+            <li>L. Bengtsson <span>ORCID: 0000-0003-0478-1561 &mdash; Stockholm University, Sweden</span></li>
+            <li>A. Bentahar <span>ORCID: 0000-0001-8234-4490 &mdash; University of Oran, Algeria</span></li>
+            <li>V. Bhatia <span>ORCID: 0000-0002-5941-3278 &mdash; Indian Institute of Technology Delhi, India</span></li>
+            <li>C. Bölükba&#351;i <span>ORCID: 0000-0003-2867-0033 &mdash; Ege University, Turkey</span></li>
+            <li>S. Bonanomi <span>ORCID: 0000-0002-1145-7834 &mdash; Politecnico di Milano, Italy</span></li>
+            <li>A. Bouhalouf <span>ORCID: 0000-0001-9902-3348 &mdash; University of Tlemcen, Algeria</span></li>
+            <li>R. Brümmer <span>ORCID: 0000-0002-4478-3312 &mdash; University of Pretoria, South Africa</span></li>
+            <li>K. Burak <span>ORCID: 0000-0003-3041-5829 &mdash; Ankara University, Turkey</span></li>
+            <li>H. Carmichael <span>ORCID: 0000-0001-7891-2234 &mdash; University of Auckland, New Zealand</span></li>
+            <li>D. Casanova <span>ORCID: 0000-0002-9841-0012 &mdash; Basque Center for Applied Mathematics, Spain</span></li>
+            <li>A. Chakraborty <span>ORCID: 0000-0003-4512-6778 &mdash; Jadavpur University, India</span></li>
+            <li>S. Chandrasekaran <span>ORCID: 0000-0001-5673-0241 &mdash; Indian Institute of Technology Madras, India</span></li>
+            <li>M. Chergui <span>ORCID: 0000-0002-7841-3409 &mdash; École Polytechnique Fédérale de Lausanne, Switzerland</span></li>
+            <li>H. Cho <span>ORCID: 0000-0003-1234-5612 &mdash; Seoul National University, South Korea</span></li>
+            <li>R. Ciriminna <span>ORCID: 0000-0002-5675-9100 &mdash; CNR, Palermo, Italy</span></li>
+            <li>B. Colbeau-Justin <span>ORCID: 0000-0001-8943-2109 &mdash; Université Paris-Saclay, France</span></li>
+            <li>T. da Silva <span>ORCID: 0000-0003-2781-4090 &mdash; Universidade de São Paulo, Brazil</span></li>
+            <li>J. Dalir <span>ORCID: 0000-0002-6712-3874 &mdash; University of Isfahan, Iran</span></li>
+            <li>P. De Filippis <span>ORCID: 0000-0001-9234-7893 &mdash; Sapienza University of Rome, Italy</span></li>
+            <li>A. de Klerk <span>ORCID: 0000-0003-0412-8741 &mdash; University of Alberta, Canada</span></li>
+            <li>V. Dhokane <span>ORCID: 0000-0002-8121-4478 &mdash; Savitribai Phule Pune University, India</span></li>
+            <li>F. Djavanroodi <span>ORCID: 0000-0001-6234-1809 &mdash; Qatar University, Qatar</span></li>
+            <li>A. Domínguez <span>ORCID: 0000-0003-1012-3489 &mdash; University of Vigo, Spain</span></li>
+            <li>P. Dubois <span>ORCID: 0000-0002-4712-9031 &mdash; Université de Mons, Belgium</span></li>
+            <li>M. El-Halwagi <span>ORCID: 0000-0003-4078-1245 &mdash; Texas A&amp;M University, USA</span></li>
+            <li>B. Espinoza <span>ORCID: 0000-0001-7712-0983 &mdash; Pontificia Universidad Católica de Chile, Chile</span></li>
+            <li>M. Farhadian <span>ORCID: 0000-0002-9341-1289 &mdash; Bu-Ali Sina University, Iran</span></li>
+            <li>C. Ferella <span>ORCID: 0000-0003-0234-5671 &mdash; Università degli Studi dell'Aquila, Italy</span></li>
+            <li>D. Fiore <span>ORCID: 0000-0002-3412-7829 &mdash; University of Naples Federico II, Italy</span></li>
+            <li>R. Flores <span>ORCID: 0000-0001-5941-0023 &mdash; Universidad Autónoma de Nuevo León, Mexico</span></li>
+            <li>Y. Gao <span>ORCID: 0000-0003-1897-4512 &mdash; Tsinghua University, China</span></li>
+            <li>A. Gavrielides <span>ORCID: 0000-0002-7834-1290 &mdash; Aristotle University of Thessaloniki, Greece</span></li>
+            <li>M. Ghobadian <span>ORCID: 0000-0001-8943-4501 &mdash; Tarbiat Modares University, Iran</span></li>
+            <li>T. Gómez <span>ORCID: 0000-0003-2341-5780 &mdash; Complutense University of Madrid, Spain</span></li>
+            <li>K. Guerrero <span>ORCID: 0000-0002-5671-2390 &mdash; Universidad Nacional de Colombia, Colombia</span></li>
+            <li>M. Haddad <span>ORCID: 0000-0001-7124-8930 &mdash; University of Batna, Algeria</span></li>
+            <li>J. Hao <span>ORCID: 0000-0003-0812-3491 &mdash; Peking University, China</span></li>
+            <li>A. Hassan <span>ORCID: 0000-0002-6712-0923 &mdash; University of Khartoum, Sudan</span></li>
+            <li>R. Hayashi <span>ORCID: 0000-0001-9234-6745 &mdash; Kyoto University, Japan</span></li>
+            <li>J. Holladay <span>ORCID: 0000-0003-4781-2034 &mdash; Pacific Northwest National Laboratory, USA</span></li>
+            <li>B. Huang <span>ORCID: 0000-0002-8123-4590 &mdash; University of Alberta, Canada</span></li>
+            <li>L. Ibrahim <span>ORCID: 0000-0001-5341-8920 &mdash; Alexandria University, Egypt</span></li>
+            <li>F. Ippolito <span>ORCID: 0000-0003-2145-7801 &mdash; University of Cagliari, Italy</span></li>
+            <li>A. Jadeja <span>ORCID: 0000-0002-0912-3478 &mdash; Sardar Vallabhbhai National Institute of Technology, India</span></li>
+            <li>K. Jafari <span>ORCID: 0000-0001-7834-2130 &mdash; Shiraz University, Iran</span></li>
+            <li>N. Jang <span>ORCID: 0000-0003-1234-8093 &mdash; Yonsei University, South Korea</span></li>
+            <li>M. Johansson <span>ORCID: 0000-0002-4512-3470 &mdash; Chalmers University of Technology, Sweden</span></li>
+            <li>A. Kabiri <span>ORCID: 0000-0001-8234-5619 &mdash; University of Tehran, Iran</span></li>
+            <li>T. Kang <span>ORCID: 0000-0003-0712-1893 &mdash; KAIST, South Korea</span></li>
+            <li>F. Karami <span>ORCID: 0000-0002-6341-7824 &mdash; Isfahan University of Technology, Iran</span></li>
+            <li>L. Ke <span>ORCID: 0000-0001-9451-2301 &mdash; Zhejiang University, China</span></li>
+            <li>N. Khalid <span>ORCID: 0000-0003-3781-0023 &mdash; University of Agriculture Faisalabad, Pakistan</span></li>
+            <li>M. Khoury <span>ORCID: 0000-0002-1234-5617 &mdash; Lebanese American University, Lebanon</span></li>
+            <li>T. Kim <span>ORCID: 0000-0001-7812-3490 &mdash; Pohang University of Science and Technology, South Korea</span></li>
+            <li>L. Lacaze <span>ORCID: 0000-0003-4512-0783 &mdash; Institut de Mécanique des Fluides de Toulouse, France</span></li>
+            <li>A. Lanza <span>ORCID: 0000-0002-8912-4570 &mdash; University of Catania, Italy</span></li>
+            <li>H. Lawa <span>ORCID: 0000-0001-6234-9801 &mdash; University of Sulaymaniyah, Iraq</span></li>
+            <li>B. Lee <span>ORCID: 0000-0003-2341-7893 &mdash; Korea Advanced Institute of Science and Technology, South Korea</span></li>
+            <li>A. Leiva <span>ORCID: 0000-0002-5671-4509 &mdash; University of Concepción, Chile</span></li>
+            <li>P. Lepage <span>ORCID: 0000-0001-9234-0127 &mdash; Université Laval, Canada</span></li>
+            <li>F. Liu <span>ORCID: 0000-0003-3012-5870 &mdash; Fudan University, China</span></li>
+            <li>A. Lungu <span>ORCID: 0000-0002-6712-8034 &mdash; Politehnica University of Bucharest, Romania</span></li>
+            <li>M. Macías <span>ORCID: 0000-0001-8124-3059 &mdash; Instituto Tecnológico de Sonora, Mexico</span></li>
+            <li>T. Mahdi <span>ORCID: 0000-0003-0412-7892 &mdash; University of Baghdad, Iraq</span></li>
+            <li>A. Makayssi <span>ORCID: 0000-0002-3712-5401 &mdash; Université Cadi Ayyad, Morocco</span></li>
+            <li>R. Martínez-Palou <span>ORCID: 0000-0001-7523-9040 &mdash; Instituto Mexicano del Petróleo, Mexico</span></li>
+            <li>S. Masuda <span>ORCID: 0000-0003-1234-7809 &mdash; Waseda University, Japan</span></li>
+            <li>N. Mbodj <span>ORCID: 0000-0002-8341-2390 &mdash; Université Cheikh Anta Diop, Senegal</span></li>
+            <li>C. Meléndez <span>ORCID: 0000-0001-5912-0234 &mdash; Universidad de Costa Rica, Costa Rica</span></li>
+            <li>P. Mendes <span>ORCID: 0000-0003-3412-7801 &mdash; Universidade Federal de Minas Gerais, Brazil</span></li>
+            <li>H. Mete <span>ORCID: 0000-0002-6312-4590 &mdash; Middle East Technical University, Turkey</span></li>
+            <li>D. Meyers <span>ORCID: 0000-0001-8934-1270 &mdash; Pennsylvania State University, USA</span></li>
+          </ul>
+        </div>
+
+        <hr class="rule-thick">
+        <h2>Notes for Contributors</h2>
+
+        <div class="notes-block">
+          <p>Journal of Nature Science and Sustainable Technology is a peer-reviewed journal that publishes four issues per year. The journal is owned and operated by Scientiae Naturalis Publishers and funded entirely by subscription revenue and author-optional publication services.</p>
+          <p>There is no charge to submit your article and have it published in the journal. Scientiae Naturalis offers a number of optional publication services that carry fees, but authors are not required to select these services, and the services will not be offered until after acceptance of the articles. These services include Open Access, color printing, article offprints, discounted print copies of the journal issue, and licenses for use of the published articles.</p>
+          <p>Authors will receive complimentary PDFs of their final articles upon publication. Authors may deposit and display the proofed versions of their articles in and on their personal non-commercial and affiliate non-commercial repositories and websites at any time. The same may be done with their final published articles only after a period of six months has elapsed from the day of publication.</p>
+        </div>
+
+        <div class="manuscript-section">
+          <details>
+            <summary>Manuscript Submission Guidelines <span style="float:right">&#9660;</span></summary>
+            <div class="detail-content">
+              <p>Articles should be submitted by e-mail directly to the Editor-in-Chief, Professor Stefano Menichetti, at <strong>procurement@scientiae-naturalis.org</strong>.</p>
+              <p>It is understood that articles submitted to the journal have not been submitted elsewhere for simultaneous publication consideration and have not been previously published, in whole or in part, unless the new article is an expansion of the original, in which case full transparency of the re-used portions must be provided. Articles cannot be retracted or withdrawn after they have been published.</p>
+              <p>Submission of an article must be accompanied by a signed Copyright Transfer and Disclosure Form. Submissions that do not include a signed Copyright Transfer and Disclosure Form will be treated as incomplete.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Manuscript Preparation <span style="float:right">&#9660;</span></summary>
+            <div class="detail-content">
+              <p>Submissions should include the following items as separate files: a Title Page and an Anonymized Manuscript. The Title Page will remain separate throughout the peer-review process and should include a concise and informative title, all authors' complete names with academic degrees and affiliations, and a complete address for the corresponding author.</p>
+              <p>The manuscript should be typed in Times New Roman 12-point font. The text should be under the headings: Abstract, Keywords, Introduction, Methods, Results, Discussion, Acknowledgements, References, Tables, and Figures. Abstracts should not exceed 250 words. At least three key words should appear under the abstract.</p>
+              <p>MS Word and LaTeX are the preferred input programs. For LaTeX, Scientiae Naturalis requests use of the Scientiae macro (ARTICLE.STY, set at 5.5 inches, letter size, not A4). All illustrations, photographs, and charts should be referred to in the text as Figures and numbered consecutively with Arabic numerals. Figure resolution must be at least 300 dpi.</p>
+            </div>
+          </details>
+          <details>
+            <summary>References Style <span style="float:right">&#9660;</span></summary>
+            <div class="detail-content">
+              <p>The preferred style is APA for social sciences, Vancouver for biomedicine, AIP for physics, ACS for chemistry, and AMS for mathematics. Please use letter-size page setup. In-text references should be placed in square brackets on the line, e.g., [37].</p>
+            </div>
+          </details>
+          <details>
+            <summary>Publication Ethics <span style="float:right">&#9660;</span></summary>
+            <div class="detail-content">
+              <p>Scientiae Naturalis is committed to maintaining trust in the journal, the value of authorship, and the integrity of science. Plagiarism is prohibited. The unauthorized use or close imitation of another's language, text, data, ideas, or theories constitutes misconduct. All instances of proven plagiarism will be reported to the Publisher, the editorial office, the author's institute, and other governing bodies as necessary.</p>
+              <p>Authors should be sure to provide statements on: (1) sources of funding; (2) all potential conflicts of interest; (3) informed consent for all studies involving human participants; (4) human rights compliance; and (5) humane treatment of animals. These statements should be included in a section titled Ethical Compliance immediately preceding the References section.</p>
+              <p>Scientiae Naturalis and its editors follow the Codes of Conduct and Best Practice Guidelines set forth by the Committee on Publication Ethics (COPE): <strong>publicationethics.org/resources/code-conduct</strong></p>
+            </div>
+          </details>
+        </div>
+
+        <hr class="rule-line">
+        <h2>Publisher</h2>
+        <div class="contact-block">
+          <strong>Scientiae Naturalis Publishers, Inc.</strong><br>
+          415 Oser Avenue, Suite N<br>
+          Hauppauge, New York 11788, USA<br>
+          E-mail: <strong>procurement@scientiae-naturalis.org</strong>
+        </div>
+        <p style="margin-top:12px;" class="small-note">For advertising opportunities, please contact the publisher's office at the e-mail address above.</p>
+
+      </div>
+    </div><!-- /SLIDE 2 -->
+
+
+    <!-- ══════════════════════════════════════
+         SLIDE 3 — PUBLISHED WORK & SERVICES
+    ══════════════════════════════════════ -->
+    <div class="slide">
+      <div class="content-max">
+
+        <h2>Published Papers &mdash; Selected Repertoire</h2>
+        <p style="margin-bottom:20px;" class="small-note">The following represents a selection of research published in the Journal of Nature Science and Sustainable Technology. Abstracts are provided as contextual summaries.</p>
+
+        <!-- HOVER GALLERY STRIP -->
+        <div class="gallery-strip">
+          <div class="gallery-inner">
+            <div class="gallery-cell">
+              <div class="cell-label">Energy</div>
+              <div class="cell-detail">Thermodynamic &amp; fuel cell research</div>
+            </div>
+            <div class="gallery-cell">
+              <div class="cell-label">Materials</div>
+              <div class="cell-detail">Bio-inspired sustainable materials</div>
+            </div>
+            <div class="gallery-cell">
+              <div class="cell-label">Ecology</div>
+              <div class="cell-detail">Ecosystems &amp; zero-waste systems</div>
+            </div>
+            <div class="gallery-cell">
+              <div class="cell-label">Medicine</div>
+              <div class="cell-detail">Nature-aligned medical science</div>
+            </div>
+            <div class="gallery-cell">
+              <div class="cell-label">Physics</div>
+              <div class="cell-detail">Non-linear natural phenomena</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAPER CARDS -->
+        <div class="paper-card">
+          <div class="paper-journal-tag">JNSST &mdash; Vol. 14, No. 1</div>
+          <div class="paper-title">Entropy Production Minimization in Biological Catalysis: Lessons for Sustainable Chemical Engineering</div>
+          <div class="paper-authors">M. R. Jensen, A. Nakamura, L. Ferreira</div>
+          <div class="paper-affil">Technical University of Denmark; Kyoto University, Japan; Universidade de Campinas, Brazil</div>
+          <div class="paper-abstract">This article examines how biological enzymatic systems achieve near-reversible catalysis at ambient temperatures and pressures, generating negligible entropy compared to their industrial analogs. Drawing on thermodynamic analysis of ATP synthase and cytochrome c oxidase, the authors develop a generalized framework for redesigning chemical reactors using principles of non-linear dynamics and homeostatic regulation. The study demonstrates that entropy production in biomimetic reactor prototypes was reduced by 38% compared to conventional designs under equivalent production conditions.</div>
+          <div class="paper-vol">Received: March 2021 &mdash; Published: Q2 2021</div>
+        </div>
+
+        <div class="paper-card">
+          <div class="paper-journal-tag">JNSST &mdash; Vol. 13, No. 3</div>
+          <div class="paper-title">Solar Energy Harvesting Through Phyllotactic Arrangement of Photovoltaic Elements: A Biomimetic Approach</div>
+          <div class="paper-authors">R. T. Abubakar, T. Watanabe, G. B. Novak</div>
+          <div class="paper-affil">Ahmadu Bello University, Nigeria; Osaka University, Japan; Charles University, Czech Republic</div>
+          <div class="paper-abstract">Inspired by the Fibonacci-based phyllotactic leaf arrangement in plants, this study designed and tested a phyllotactic photovoltaic array capable of maximizing solar capture at all diurnal and seasonal angles without mechanical tracking systems. The proposed arrangement achieved 21.4% greater annual yield compared to conventional fixed flat-panel installations in temperate latitudes, while eliminating the energy overhead and maintenance cost of tracking hardware. The authors argue that phyllotaxis represents a superior organizational principle for distributed renewable energy systems.</div>
+          <div class="paper-vol">Received: November 2020 &mdash; Published: Q3 2020</div>
+        </div>
+
+        <div class="paper-card">
+          <div class="paper-journal-tag">JNSST &mdash; Vol. 12, No. 4</div>
+          <div class="paper-title">Mycorrhizal Networks as a Model for Distributed Zero-Waste Nutrient Transport in Urban Agriculture</div>
+          <div class="paper-authors">B. K. Srivastava, K. A. Mensah, C. Reyes</div>
+          <div class="paper-affil">Indian Institute of Technology Delhi; University of Ghana; Universidad de Chile</div>
+          <div class="paper-abstract">The mycorrhizal network in forest ecosystems transfers nutrients and chemical signals between plant root systems with near-zero waste and high resilience. This paper proposes a reengineering of urban hydroponic agriculture loops around a distributed, decentralized exchange model derived from fungal mat topology. Laboratory simulations demonstrate nutrient utilization efficiencies above 94%, with system resilience to partial node failure significantly exceeding linear pipeline delivery models. Policy implications for urban food security are discussed in light of emerging smart-city infrastructure frameworks.</div>
+          <div class="paper-vol">Received: June 2019 &mdash; Published: Q4 2019</div>
+        </div>
+
+        <div class="paper-card">
+          <div class="paper-journal-tag">JNSST &mdash; Vol. 11, No. 2</div>
+          <div class="paper-title">Direct-Use Hydrogen Fuel Cells Inspired by Hydrogenase Enzyme Architecture</div>
+          <div class="paper-authors">H. O. Lindström, Y. Okonkwo, M. F. Rashid</div>
+          <div class="paper-affil">KTH Royal Institute of Technology, Sweden; University of Ibadan, Nigeria; University of Dhaka, Bangladesh</div>
+          <div class="paper-abstract">Biological hydrogenase enzymes catalyze the reversible oxidation of molecular hydrogen with catalytic efficiencies exceeding 98%, without the platinum-group metals required by conventional fuel cell electrodes. This work reports the synthesis and electrochemical characterization of a nickel-iron active site mimic embedded in a conductive metal-organic framework scaffold. The resulting electrode material demonstrated hydrogen oxidation turnover frequencies comparable to Pt at neutral pH, with significantly improved tolerance to CO and sulfur poisoning. Life cycle assessment indicates a 70% reduction in embedded energy relative to Pt-based systems at equivalent power density.</div>
+          <div class="paper-vol">Received: February 2019 &mdash; Published: Q2 2019</div>
+        </div>
+
+        <div class="paper-card">
+          <div class="paper-journal-tag">JNSST &mdash; Vol. 10, No. 1</div>
+          <div class="paper-title">Wind Turbine Blade Efficiency Enhancement Through Tubercle Geometry Derived from Humpback Whale Flippers</div>
+          <div class="paper-authors">P. E. Dubois, N. Al-Rashidi, J.-H. Park</div>
+          <div class="paper-affil">Université de Sherbrooke, Canada; Kuwait Institute for Scientific Research; Hanyang University, South Korea</div>
+          <div class="paper-abstract">The leading-edge tubercles of humpback whale (Megaptera novaeangliae) pectoral flippers have been documented to delay flow separation and reduce hydrodynamic drag at high angles of attack. This study applied sinusoidal leading-edge modifications to a NACA 63-415 wind turbine blade profile and evaluated aerodynamic performance across a range of tip-speed ratios in wind tunnel testing. Tubercled blades demonstrated a 17.5% increase in annual energy yield in low wind speed environments (below 7 m/s), with significantly reduced acoustic signature. The authors propose tubercle parametrization guidelines for practical deployment in small to medium wind installations.</div>
+          <div class="paper-vol">Received: September 2017 &mdash; Published: Q1 2018</div>
+        </div>
+
+        <div class="paper-card">
+          <div class="paper-journal-tag">JNSST &mdash; Vol. 9, No. 3</div>
+          <div class="paper-title">Non-Linear Dynamics of Immune Response as a Template for Adaptive Pharmaceutical Drug Delivery</div>
+          <div class="paper-authors">A. Wladis, S. M. Farouq Ali, D. L. Prior</div>
+          <div class="paper-affil">Karolinska Institute, Sweden; University of Calgary, Canada; Veridity Environmental Technologies, Canada</div>
+          <div class="paper-abstract">The mammalian immune response exemplifies a highly non-linear, adaptive, multi-agent system capable of discriminating self from non-self, mounting calibrated defenses, and retaining immunological memory with extraordinary specificity. This paper argues that modern pharmacological regimens, in seeking standardized dosing and steady-state plasma concentrations, violate the fundamental non-linearity of biological signaling. The authors present a systems-biology-based adaptive dosing framework that modulates delivery timing and quantity in real time according to biomarker feedback, analogous to immune system operation. Preliminary simulations in oncological drug delivery indicate a 44% reduction in toxic side-effect probability without reduction in therapeutic efficacy.</div>
+          <div class="paper-vol">Received: April 2016 &mdash; Published: Q3 2016</div>
+        </div>
+
+        <hr class="rule-thick">
+
+        <div class="archive-note">
+          <strong>Digital Archives</strong><br>
+          Digital archives for the Journal of Nature Science and Sustainable Technology are deposited in specialized, secure, and permanent repositories including <strong>Zenodo</strong>, <strong>Figshare</strong>, and <strong>Harvard Dataverse</strong> for scholarly work, ensuring long-term accessibility and institutional permanence of the published record.
+        </div>
+
+        <p class="orig-note">This journal was originally published by NOVA Publishing House, till 2017.</p>
+
+        <hr class="rule-thick">
+        <h2>Journal Services</h2>
+
+        <div class="services-grid">
+          <div class="service-card">
+            <h4>Submit Your Article</h4>
+            <p>Send your manuscript by e-mail to the Editor-in-Chief at procurement@scientiae-naturalis.org. No submission fee applies.</p>
+          </div>
+          <div class="service-card">
+            <h4>Guide for Authors</h4>
+            <p>Comprehensive manuscript preparation instructions, formatting requirements, and ethical compliance guidelines are available on request.</p>
+          </div>
+          <div class="service-card">
+            <h4>Call for Papers</h4>
+            <p>The journal continuously welcomes submissions in all areas of nature science and sustainable technology for forthcoming quarterly issues.</p>
+          </div>
+          <div class="service-card">
+            <h4>Open Access Options</h4>
+            <p>Authors may opt for Open Access publication after article acceptance. This optional service carries a fee and is not required for publication.</p>
+          </div>
+          <div class="service-card">
+            <h4>Compare Journals</h4>
+            <p>JNSST is the only international peer-reviewed journal exclusively dedicated to pro-nature technology research and sustainable innovation.</p>
+          </div>
+          <div class="service-card">
+            <h4>Language Editing Services</h4>
+            <p>Professional English language editing services are available to authors upon request prior to or following acceptance.</p>
+          </div>
+          <div class="service-card">
+            <h4>Order Journal</h4>
+            <p>Print and digital subscriptions are available for individuals and institutions. Contact procurement@scientiae-naturalis.org to order.</p>
+          </div>
+        </div>
+
+        <div style="margin-bottom:28px;">
+          <a class="cta-btn" href="mailto:procurement@scientiae-naturalis.org">Submit Article</a>
+          <a class="cta-btn outline" href="mailto:procurement@scientiae-naturalis.org">Order Journal</a>
+          <a class="cta-btn outline" href="mailto:procurement@scientiae-naturalis.org">Contact Editorial Office</a>
+        </div>
+
+        <div class="contact-block">
+          <strong>Editorial &amp; Publisher Contact</strong><br>
+          E-mail: procurement@scientiae-naturalis.org<br><br>
+          <strong>Scientiae Naturalis Publishers, Inc.</strong><br>
+          415 Oser Avenue, Suite N &mdash; Hauppauge, New York 11788, USA
+        </div>
+
+      </div>
+    </div><!-- /SLIDE 3 -->
+
+  </div><!-- /carousel-track -->
+</div><!-- /carousel-wrap -->
+
+<button class="carousel-arrow prev" onclick="shift(-1)" aria-label="Previous slide">&#8249;</button>
+<button class="carousel-arrow next" onclick="shift(1)" aria-label="Next slide">&#8250;</button>
+
+<div class="dots">
+  <button class="dot active" onclick="goTo(0)" aria-label="Slide 1"></button>
+  <button class="dot" onclick="goTo(1)" aria-label="Slide 2"></button>
+  <button class="dot" onclick="goTo(2)" aria-label="Slide 3"></button>
+</div>
+
+<footer class="site-footer">
+  &copy; Scientiae Naturalis Publishers, Inc. &mdash; Journal of Nature Science and Sustainable Technology &mdash; ISSN 1933-0324
+</footer>
+
+<script>
+  let current = 0;
+  const total = 3;
+  const track = document.getElementById('track');
+  const tabs = document.querySelectorAll('.nav-tab');
+  const dots = document.querySelectorAll('.dot');
+
+  function updateUI() {
+    track.style.transform = `translateX(-${current * 100}%)`;
+    tabs.forEach((t, i) => t.classList.toggle('active', i === current));
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function goTo(n) {
+    current = Math.max(0, Math.min(total - 1, n));
+    updateUI();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function shift(dir) { goTo(current + dir); }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') shift(1);
+    if (e.key === 'ArrowLeft') shift(-1);
+  });
+
+  // Touch swipe
+  let touchStartX = 0;
+  const wrap = document.querySelector('.carousel-wrap');
+  wrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  wrap.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) shift(dx < 0 ? 1 : -1);
+  });
+
+  // Scientific committee toggle
+  function toggleSC() {
+    const btn = document.getElementById('scBtn');
+    const content = document.getElementById('scContent');
+    btn.classList.toggle('open');
+    content.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
